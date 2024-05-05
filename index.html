@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAFTY HUB</title>
+    <link rel="shortcut icon" href="House.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body onload="loadUserData()">
+    <div class="world-bg">
+        <h1>Welcome to Crafty Hub</h1>
+        <h2>Here you can post your Minecrafty Ideas, Topics, Things and what you want!</h2>
+        <hr>
+        <h3>Main Pages:</h3>
+        <center>
+            <div onclick="redirect(1)" class="crafty-selector">
+                <h2>Surface Hub</h2>
+            </div>
+            <div onclick="redirect(2)" class="crafty-selector">
+                <h2>Nether Hub</h2>
+            </div>
+            <div onclick="redirect(3)" onmouseover="userBright()" onmouseleave="unuserBright()" class="crafty-selector">
+                <h2 id="user-name">Crafty Login</h2>
+            </div>
+            <div onclick="redirect(4)" class="crafty-selector">
+                <h2>Create Topic</h2>
+            </div>
+        </center>
+        <hr>
+        <br>
+    </div>
+</body>
+
+</html>

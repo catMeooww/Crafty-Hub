@@ -1,0 +1,249 @@
+@font-face {
+    font-family: Minecraft;
+    src: url("Minecraft.ttf");
+}
+
+body {
+    font-family: Minecraft;
+    background-image: url(assets/Stone\ Background.png);
+    background-color: slategray;
+    color: aliceblue;
+}
+
+#mainBody {
+    width: 89%;
+    float: right;
+}
+
+#option-container {
+    position: fixed;
+    width: 10%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    padding: 0px;
+    background-image: url(assets/Stone\ Background.png);
+    border-right: 5px ridge rgba(0, 0, 0, 0.500);
+    cursor: url("pickaxe.png"), pointer;
+}
+
+#plataform-name-handler {
+    height: 60px;
+}
+
+.world-bg {
+    background-image: url(assets/World\ Background.jpg);
+    text-align: center;
+    background-size: cover;
+}
+
+.nether-bg {
+    background-image: url(assets/Nether\ Background.jpg);
+    text-align: center;
+    background-size: cover;
+}
+
+.wood-bg {
+    background-image: url(assets/Wood\ Background.jpg);
+    border: 1px outset rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.frame-bg {
+    background-image: url(assets/frame\ background.png);
+    background-size: cover;
+    border: 5px solid rgba(255, 255, 255, 0.700);
+    text-align: center;
+}
+
+.frame-bg img {
+    max-width: 70%;
+    max-height: 400px;
+    min-width: 20%;
+}
+
+.frame-bg iframe {
+    width: 80%;
+    height: 400px;
+}
+
+.portal-bg {
+    background-image: url(assets/portal\ background.png);
+    border: 10px ridge black;
+    text-align: center;
+}
+
+.item {
+    padding: 5px;
+    margin: 30px;
+}
+
+div {
+    padding: 2px;
+}
+
+#option-container div div,
+#plataform-name-handler {
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+@keyframes image-anim {
+    from {
+        background-color: rgba(0, 0, 0, 0.3);
+        border: 4px ridge rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background-color: rgba(100, 100, 100, 0.3);
+        border: 4px ridge rgba(100, 100, 100, 0.3);
+    }
+}
+
+#option-container img {
+    animation-name: image-anim;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+.crafty-selector {
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0.700);
+    border: 7px gray ridge;
+    padding: 3px;
+    cursor: url("pickaxe.png"), pointer;
+    margin-bottom: 5px;
+}
+
+.crafty-selector:hover {
+    color: greenyellow;
+    border: 10px lightgray ridge;
+    padding: 0px;
+}
+
+.option-icon {
+    width: 60px;
+}
+
+#option-container label {
+    position: relative;
+    top: -15px;
+    font-size: 33px;
+}
+
+#pages {
+    width: 95%;
+    border-top: 4px ridge rgba(0, 0, 0, 0.500);
+    border-bottom: 4px ridge rgba(0, 0, 0, 0.500);
+}
+
+#pages div {
+    height: 100px;
+    margin-top: 20px;
+}
+
+#login-data h2 {
+    font-size: 15px;
+}
+
+.option-label {
+    visibility: hidden;
+}
+
+.mc-button {
+    background-color: chartreuse;
+    border: 3px outset rgba(0, 128, 0, 0.600);
+    padding: 2px;
+}
+
+input,
+textarea {
+    font-family: Minecraft;
+    border: green 3px outset;
+    background-color: cornflowerblue;
+    padding: 5px;
+}
+
+/*FORUMS*/
+
+.forumdiv {
+    border: 5px outset black;
+    background-color: rgba(0, 0, 0, 0.500);
+    padding: 10px;
+}
+
+.trueV {
+    background-color: rgba(0, 128, 0, 0.3);
+    border: 2px outset rgba(0, 0, 0, 0.3);
+}
+
+.falseV {
+    background-color: rgba(255, 255, 0, 0.3);
+    border: 2px outset rgba(0, 0, 0, 0.3);
+}
+
+.isVerifier {
+    float: inline-end;
+}
+
+.headerTools {
+    border-bottom: ridge 3px black;
+    position: fixed;
+    top: 0;
+    width: 87%;
+}
+
+#sendBar {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 150px;
+    border: outset 2px black;
+}
+
+#interactions button {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px outset black;
+    height: 30px;
+    width: 30px;
+    color: aliceblue;
+}
+
+#interactions button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 3px inset black;
+    color: cornflowerblue;
+    font-weight: bold;
+}
+
+#commentSection {
+    z-index: 5px;
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    background-color: rgb(26, 26, 26);
+    left: 100%;
+    top: 0px;
+    text-align: center;
+    border-left: ridge white 3px;
+}
+
+.commentItem{
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 3px outset black;
+    margin: 5px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.commentError{
+    width: 90%;
+    border: 3px inset black;
+    margin: 5px;
+}
+
+.commentDiamond{
+    color:cornflowerblue;
+}

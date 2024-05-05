@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAFTY HUB</title>
+    <link rel="shortcut icon" href="House.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body onload="loadUserData(); getForumData()">
+    <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
+        <br><br>
+        <div id="plataform-name-handler" onclick="redirect(0)">
+            <img src="assets/CraftyHub Logo.png" class="option-icon"><label class="option-label">Crafty Hub</label>
+        </div>
+        <br><br>
+        <div id="pages">
+            <div id="surfacehub-btn" onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon"><label class="option-label">Surface
+                    Hub</label>
+            </div>
+            <div id="netherhub-btn" onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon"><label class="option-label">Nether
+                    Hub</label>
+            </div>
+            <div id="create-btn" onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon"><label class="option-label">Create</label>
+            </div>
+        </div>
+        <br>
+        <div id="login-data" onclick="redirect(3)">
+            <img src="assets/account and about.png" class="option-icon">
+            <label id="user-name" class="option-label">Crafty Login</label>
+        </div>
+    </div>
+
+    <!--Site Body-->
+
+    <div id="mainBody">
+        <div class="headerTools wood-bg">
+            <div>
+                <label id="forumID" style="float: left;font-size: 10px;"></label>
+                <div style="float: right;" id="interactions">
+                    <button onclick="OpenComments()"><img style="width: 25px;margin-left: -6px;margin-top: -25px;" src="assets/wood_sign.jpg"></button>
+                    <button onclick="redirect(1)">X</button>
+                </div>
+            </div>
+            <center>
+                <h2 id="thisForumName"></h2>
+            </center>
+            <hr color="black">
+            <center>
+                <div id="thisForumHeader" style="text-align: left;"></div>
+            </center>
+        </div>
+        <div id="commentSection">
+            <button onclick="CloseComments()" style="float: left;background-color: black;color: orange;">X</button>
+            <p id="commentsHeader">Comments</p>
+            <hr>
+            <div id="forumComments" style="height: 70%;overflow-y: scroll;">
+
+            </div>
+            <hr>
+            <div id="sendComment">
+                <input id="commentInput">
+                <button onclick="sendComment('diamond')">Diamond</button>
+                <button onclick="sendComment('text')">Send</button>
+                <p id="commentError"></p>
+            </div>
+        </div>
+        <div id="forumData" style="margin-top: 150px;">
+            LOADING...
+        </div>
+    </div>
+</body>
+
+</html>

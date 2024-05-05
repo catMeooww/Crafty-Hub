@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAFTY HUB</title>
+    <link rel="shortcut icon" href="House.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="main.js"></script>
+    <script src="loging.js"></script>
+</head>
+
+<body onload="loadUserLogData()">
+    <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
+        <br><br>
+        <div id="plataform-name-handler" onclick="redirect(0)">
+            <img src="assets/CraftyHub Logo.png" class="option-icon"><label class="option-label">Crafty Hub</label>
+        </div>
+        <br><br>
+        <div id="pages">
+            <div id="surfacehub-btn" onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon"><label class="option-label">Surface
+                    Hub</label>
+            </div>
+            <div id="netherhub-btn" onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon"><label class="option-label">Nether
+                    Hub</label>
+            </div>
+            <div id="create-btn" onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon"><label class="option-label">Create</label>
+            </div>
+        </div>
+        <br>
+        <div id="login-data" onclick="redirect(3)">
+            <img src="assets/account and about.png" class="option-icon">
+            <label id="user-name" class="option-label">Crafty Login</label>
+        </div>
+    </div>
+
+    <!--Site Body-->
+
+    <div id="mainBody">
+        <div class="world-bg">
+            <center>
+                <img src="assets/account and about.png" style="margin-bottom: -40px;width: 100px;">
+                <h1>Log-in Crafty Hub</h1>
+            </center>
+            <hr>
+            <div id="login-page" style="height: 450px;">
+                <div id="logindiv"
+                    style="padding: 10px;background-color: rgba(0, 0, 0, 0.500); border: outset black 5px;">
+                    <label>Log-in Account</label>
+                    <p>Your Username</p>
+                    <input type='text' id='login-username'>
+                    <p>Your Password</p>
+                    <input type='password' id='login-userpassword'>
+                    <br><br>
+                    <button onclick='LogAccount()' class="mc-button">Log-in</button>
+                    <br>
+                    <p id="login-error"></p>
+                </div>
+                <hr>
+                <br><br>
+                <center>
+                    <button id="switch-btn" class="mc-button" onclick="switchlogin()">Create Account</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

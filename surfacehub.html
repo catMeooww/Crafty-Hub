@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAFTY HUB</title>
+    <link rel="shortcut icon" href="House.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body onload="loadUserData(); getForums(true)">
+    <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
+        <br><br>
+        <div id="plataform-name-handler" onclick="redirect(0)">
+            <img src="assets/CraftyHub Logo.png" class="option-icon"><label class="option-label">Crafty Hub</label>
+        </div>
+        <br><br>
+        <div id="pages">
+            <div id="surfacehub-btn" onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon"><label class="option-label">Surface Hub</label>
+            </div>
+            <div id="netherhub-btn" onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon"><label class="option-label">Nether Hub</label>
+            </div>
+            <div id="create-btn" onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon"><label class="option-label">Create</label>
+            </div>
+        </div>
+        <br>
+        <div id="login-data" onclick="redirect(3)">
+            <img src="assets/account and about.png" class="option-icon">
+            <label id="user-name" class="option-label">Crafty Login</label>
+        </div>
+    </div>
+
+    <!--Site Body-->
+
+    <div id="mainBody">
+        <div class="world-bg">
+            <br><br><br>
+            <img src="assets/surface hub island.png" style="margin-bottom: -40px;width: 100px;">
+            <h1>Surface Hub</h1>
+            <hr>
+            <p>Welcome to Crafty Hub, in the Surface Hub you can acess the verified topics in the site</p>
+            <hr>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+        <br><br>
+        <div id="output" translate="no"></div>
+    </div>
+</body>
+
+</html>

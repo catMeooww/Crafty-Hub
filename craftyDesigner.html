@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAFTY HUB</title>
+    <link rel="shortcut icon" href="House.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+
+    <script src="main.js"></script>
+    <script src="creator.js"></script>
+
+    <style>
+        button{
+            padding: 2px;
+            margin: 1px;
+            background-color: aqua;
+            border:2px inset rgba(0, 0, 0, 0.500);
+            font-family: Minecraft;
+        }
+    </style>
+</head>
+
+<body onload="loadUserCreatorData()">
+    <div id="canEditDiv"
+        style="position: fixed;z-index: 100;left: 10%;top: 0;width: 90%;height: 100%;background-image: url(assets/Stone\ Background.png);">
+        <h1 id="canEditLog">LOADING...</h1>
+    </div>
+    <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
+        <br><br>
+        <div id="plataform-name-handler" onclick="redirect(0)">
+            <img src="assets/CraftyHub Logo.png" class="option-icon"><label class="option-label">Crafty Hub</label>
+        </div>
+        <br><br>
+        <div id="pages">
+            <div id="surfacehub-btn" onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon"><label class="option-label">Surface
+                    Hub</label>
+            </div>
+            <div id="netherhub-btn" onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon"><label class="option-label">Nether
+                    Hub</label>
+            </div>
+            <div id="create-btn" onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon"><label class="option-label">Create</label>
+            </div>
+        </div>
+        <br>
+        <div id="login-data" onclick="redirect(3)">
+            <img src="assets/account and about.png" class="option-icon">
+            <label id="user-name" class="option-label">Crafty Login</label>
+        </div>
+    </div>
+
+    <!--Site Body-->
+
+    <div id="mainBody">
+        <div class="headerTools wood-bg">
+            <center>
+                <h2>Creating a Forum: <b id="ForumNameHandler"></b></h2>
+            </center>
+            <hr color="black">
+            <center>
+                <label>Creator Tools</label><br>
+                <button class="ToolAdd" onclick="addToTopic(1)">Text</button>
+                <button class="ToolAdd" onclick="addToTopic(2)">Image</button>
+                <button class="ToolAdd" onclick="addToTopic(3)">Link</button>
+                <button class="ToolAdd" onclick="addToTopic(4)">IFrame</button>
+                <button class="ToolAdd" onclick="addToTopic(5)">Crafty Article</button>
+            </center>
+        </div>
+        <div id="createMain" style="margin-top: 150px;">
+
+        </div>
+        <br><br><br><br>
+        <div id="sendBar">
+            <p>Length: <label id="LabelLength">0</label></p>
+            <button onclick="send()">SEND</button>
+        </div>
+    </div>
+</body>
+
+</html>
