@@ -46,7 +46,11 @@ function loadUserData() {
                         canPass = data.val();
                         if (canPass == password) {
                             logged = true;
-                            document.getElementById("user-name").innerHTML = user;
+                            if (isMobile) {
+                                document.getElementById("user-name-mb").innerHTML = user;
+                            } else {
+                                document.getElementById("user-name").innerHTML = user;
+                            }
                             console.log("logged: " + logged);
                         }
                     })
@@ -157,7 +161,7 @@ function getForumData() {
         //forum header
         firebase.database().ref("/forums/" + selectedForum + "/name").on("value", data => {
             thisForumName = data.val();
-            if(thisForumName == undefined){
+            if (thisForumName == undefined) {
                 document.getElementsByClassName('headerTools').item(0).innerHTML = "Could Not Find Providen Topic );";
             }
             document.getElementById("thisForumName").innerHTML = thisForumName;
@@ -201,7 +205,7 @@ function getForumData() {
                 }
                 ThisResourcesQuantity++
             });
-            if(ThisResourcesQuantity == 0){
+            if (ThisResourcesQuantity == 0) {
                 document.getElementById("forumData").innerHTML += "ERROR - Providen Topic has no itens. 404";
             }
         });
