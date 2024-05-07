@@ -2,6 +2,8 @@ var user = localStorage.getItem("user");
 var password = localStorage.getItem("password");
 var logged = false;
 
+var isMobile = false;
+
 const firebaseConfig = {
     apiKey: "AIzaSyCKvz7g09FsdbEhA0Kr87_FWI5PjW1K1lM",
     authDomain: "crafty-news-forum.firebaseapp.com",
@@ -12,6 +14,22 @@ const firebaseConfig = {
     appId: "1:110293336180:web:25cc1fe8bdfc1b563d5121"
 };
 firebase.initializeApp(firebaseConfig);
+
+function verifyMobile(hasHeader) {
+    var testMobile = /iPhone|Android|iPad/i.test(navigator.userAgent)
+    if (testMobile) {
+        isMobile = true
+        document.getElementById("option-container").style.visibility = 'hidden';
+        document.getElementById("option-container-mobile").style.visibility = 'visible';
+        document.getElementById("mainBody").style.width = '100%';
+        document.getElementById("mainBody").style.marginTop = '20%';
+        if (hasHeader) {
+            document.getElementsByClassName('headerTools').item(0).style.top = '20%';
+            document.getElementsByClassName('headerTools').item(0).style.left = '0%';
+            document.getElementsByClassName('headerTools').item(0).style.width = '100%';
+        }
+    }
+}
 
 function loadUserData() {
     if (user != undefined && password != undefined) {
@@ -139,6 +157,9 @@ function getForumData() {
         //forum header
         firebase.database().ref("/forums/" + selectedForum + "/name").on("value", data => {
             thisForumName = data.val();
+            if(thisForumName == undefined){
+                document.getElementsByClassName('headerTools').item(0).innerHTML = "Could Not Find Providen Topic );";
+            }
             document.getElementById("thisForumName").innerHTML = thisForumName;
         })
         firebase.database().ref("/forums/" + selectedForum + "/by").on("value", data => {
@@ -157,15 +178,16 @@ function getForumData() {
         //forum body
         firebase.database().ref("/forums/" + selectedForum + "/resources").on('value', function (snapshot) {
             document.getElementById("forumData").innerHTML = "";
+            ThisResourcesQuantity = 0
             snapshot.forEach(function (childSnapshot) {
                 childKey = childSnapshot.key; childData = childSnapshot.val();
-    
+
                 firebaseMessageId = childKey;
                 resourceItem = childData;
-    
+
                 resourceData = resourceItem['data'];
                 resourceType = resourceItem['type'];
-    
+
                 if (resourceType == "Text") {
                     document.getElementById("forumData").innerHTML += "<div class='wood-bg item'><h3>" + resourceData + "</h3></div>";
                 } else if (resourceType == "Image") {
@@ -175,9 +197,13 @@ function getForumData() {
                 } else if (resourceType == "IFrame") {
                     document.getElementById("forumData").innerHTML += "<div class='frame-bg item'><iframe src='" + resourceData + "'></div>";
                 } else if (resourceType == "CrFr") {
-                    document.getElementById("forumData").innerHTML += "<div class='world-bg item' id='"+resourceData+"' title='go to this forum' onclick='openforum(this.id)'><h1>Crafty Forum Link: <h3>ID-" + resourceData + "</h3></h1><hr><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>";
+                    document.getElementById("forumData").innerHTML += "<div class='world-bg item' id='" + resourceData + "' title='go to this forum' onclick='openforum(this.id)'><h1>Crafty Forum Link: <h3>ID " + resourceData + "</h3></h1><hr><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>";
                 }
+                ThisResourcesQuantity++
             });
+            if(ThisResourcesQuantity == 0){
+                document.getElementById("forumData").innerHTML += "ERROR - Providen Topic has no itens. 404";
+            }
         });
 
         //forum comments
@@ -186,52 +212,58 @@ function getForumData() {
             commentsQuantity = 0;
             snapshot.forEach(function (childSnapshot) {
                 childKey = childSnapshot.key; childData = childSnapshot.val();
-    
+
                 firebaseMessageId = childKey;
                 commentItem = childData;
-    
+
                 commentData = commentItem['comment'];
                 commentSender = commentItem['by'];
-                commentColor = "rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
-                commentH3 = "<h4>"+commentSender+"</h4><h3 style='color:"+commentColor+"'>"+commentData+"</h3>";
-    
-                document.getElementById("forumComments").innerHTML += "<div class='commentItem'>"+commentH3+"</div>";
+                commentColor = "rgb(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ")";
+                commentH3 = "<h4>" + commentSender + "</h4><h3 style='color:" + commentColor + "'>" + commentData + "</h3>";
+
+                document.getElementById("forumComments").innerHTML += "<div class='commentItem'>" + commentH3 + "</div>";
                 commentsQuantity++;
             });
-            if(commentsQuantity == 0){
+            if (commentsQuantity == 0) {
                 document.getElementById("forumComments").innerHTML = "<div class='commentError'><h3>No comments yet</h3><h4>Maybe a creeper exploded them?</h4><div>";
-            }else{
+            } else {
                 document.getElementById("commentsHeader").innerHTML = "Comments - " + commentsQuantity;
             }
         });
-    }else{
+    } else {
         window.location = "surfacehub.html";
     }
 }
 
-function OpenComments(){
-    document.getElementById("commentSection").style.left = "80%";
+function OpenComments() {
+    if (isMobile) {
+        document.getElementById("commentSection").style.left = "0%";
+        document.getElementById("commentSection").style.width = "100%";
+    } else {
+        document.getElementById("commentSection").style.left = "80%";
+    }
 }
 
-function CloseComments(){
+function CloseComments() {
     document.getElementById("commentSection").style.left = "100%";
 }
 
-function sendComment(commentType){
+function sendComment(commentType) {
     commentToSend = document.getElementById("commentInput").value;
-    if(logged){
-       if(commentType == "diamond"){
-        firebase.database().ref("/forums/" + selectedForum + "/comments").push({
-            comment:"<b class='commentDiamond'>"+user+" sended a diamond!</b>",
-            by:user
-        })
-       }else if(commentType == "text" && commentToSend != ""){
-        firebase.database().ref("/forums/" + selectedForum + "/comments").push({
-            comment:commentToSend,
-            by:user
-        })
-       }
-    }else{
+    if (logged) {
+        if (commentType == "diamond") {
+            firebase.database().ref("/forums/" + selectedForum + "/comments").push({
+                comment: "<b class='commentDiamond'>" + user + " sent a diamond!</b>",
+                by: user
+            })
+        } else if (commentType == "text" && commentToSend != "") {
+            firebase.database().ref("/forums/" + selectedForum + "/comments").push({
+                comment: commentToSend,
+                by: user
+            })
+        }
+        commentToSend = document.getElementById("commentInput").value = "";
+    } else {
         document.getElementById("commentError").innerHTML = "You need to Login First";
     }
 }

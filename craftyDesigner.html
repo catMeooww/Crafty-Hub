@@ -15,21 +15,48 @@
     <script src="creator.js"></script>
 
     <style>
-        button{
+        button {
             padding: 2px;
             margin: 1px;
             background-color: aqua;
-            border:2px inset rgba(0, 0, 0, 0.500);
+            border: 2px inset rgba(0, 0, 0, 0.500);
             font-family: Minecraft;
+        }
+
+        .topCancel {
+            float: right;
+            font-size: 10px;
+            color: orange;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px outset rgba(0, 0, 0, 0.500);
         }
     </style>
 </head>
 
-<body onload="loadUserCreatorData()">
+<body onload="loadUserCreatorData(); verifyMobile(true)">
     <div id="canEditDiv"
         style="position: fixed;z-index: 100;left: 10%;top: 0;width: 90%;height: 100%;background-image: url(assets/Stone\ Background.png);">
         <h1 id="canEditLog">LOADING...</h1>
     </div>
+
+    <div id="option-container-mobile">
+        <center>
+            <label>Crafty Hub - </label><label id="user-name">Not Logged</label><br><br>
+            <span onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(3)">
+                <img src="assets/account and about.png" class="option-icon">
+            </span>
+        </center>
+    </div>
+
     <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
         <br><br>
         <div id="plataform-name-handler" onclick="redirect(0)">
@@ -82,6 +109,14 @@
             <button onclick="send()">SEND</button>
         </div>
     </div>
+    <script>
+        var testDevMobile = /iPhone|Android|iPad/i.test(navigator.userAgent)
+        if (testDevMobile) {
+           document.getElementById('canEditDiv').style.top = '20%';
+           document.getElementById('canEditDiv').style.left = '0%';
+           document.getElementById('canEditDiv').style.width = '100%';
+        }
+    </script>
 </body>
 
 </html>

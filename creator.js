@@ -53,40 +53,40 @@ var resources = [];
 function addToTopic(type) {
     if (type == 1) {
         textArea = "<p>Add Text:</p><textarea id='input" + resources.length + "'></textarea><br>";
-        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>"
-        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='wood-bg item'>" + textArea + buttons + "</div>"
+        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
+        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='wood-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "Text",
             data: ""
         });
     } else if (type == 2) {
         textArea = "<p>Add Image URL:</p><textarea id='input" + resources.length + "'></textarea><br>";
-        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>"
-        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='frame-bg item'>" + textArea + buttons + "</div>"
+        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
+        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='frame-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "Image",
             data: ""
         });
     } else if (type == 3) {
         textArea = "<p>Add Link URL:</p><textarea id='input" + resources.length + "'></textarea><br>";
-        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>"
-        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='portal-bg item'>" + textArea + buttons + "</div>"
+        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
+        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='portal-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "Link",
             data: ""
         });
     } else if (type == 4) {
         textArea = "<p>Add Link URL:</p><textarea id='input" + resources.length + "'></textarea><br>";
-        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>"
-        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='frame-bg item'>" + textArea + buttons + "</div>"
+        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
+        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='frame-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "IFrame",
             data: ""
         });
     } else if (type == 5) {
         textArea = "<p>Add Forum ID:</p><textarea id='input" + resources.length + "'></textarea><br>";
-        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>"
-        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='world-bg item'>" + textArea + buttons + "</div>"
+        buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
+        document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='world-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "CrFr",
             data: ""
@@ -96,16 +96,17 @@ function addToTopic(type) {
 
 function finishItem(item) {
     resources[item].data = document.getElementById("input" + item).value;
+    document.getElementById("div" + item).innerHTML = "<button class='topCancel' id='" + item + "' onclick='cancelItem(this.id)'>X</button>";
     if (resources[item].type == "Text") {
-        document.getElementById("div" + item).innerHTML = "<h3>" + resources[item].data + "</h3>";
+        document.getElementById("div" + item).innerHTML += "<h3>" + resources[item].data + "</h3>";
     } else if (resources[item].type == "Image") {
-        document.getElementById("div" + item).innerHTML = "<img src='" + resources[item].data + "'>";
+        document.getElementById("div" + item).innerHTML += "<img src='" + resources[item].data + "'>";
     } else if (resources[item].type == "Link") {
-        document.getElementById("div" + item).innerHTML = "<br><br><br><a target='_blank' style='color:aquamarine;' href='" + resources[item].data + "'>View Website</a><br><br><br><br>";
+        document.getElementById("div" + item).innerHTML += "<br><br><br><a target='_blank' style='color:aquamarine;' href='" + resources[item].data + "'>View Website</a><br><br><br><br>";
     } else if (resources[item].type == "IFrame") {
-        document.getElementById("div" + item).innerHTML = "<iframe src='" + resources[item].data + "'>";
+        document.getElementById("div" + item).innerHTML += "<iframe src='" + resources[item].data + "'>";
     } else if (resources[item].type == "CrFr") {
-        document.getElementById("div" + item).innerHTML = "<h1>Crafty Forum Link: <h3>ID-" + resources[item].data + "</h3></h1><hr><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+        document.getElementById("div" + item).innerHTML += "<h1>Crafty Forum Link: <h3>ID " + resources[item].data + "</h3></h1><hr><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     }
     console.log(resources);
     document.getElementById("LabelLength").innerHTML = resources.length;

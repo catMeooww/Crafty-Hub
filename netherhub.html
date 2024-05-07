@@ -13,7 +13,25 @@
     <script src="main.js"></script>
 </head>
 
-<body onload="loadUserData(); getForums(false)">
+<body onload="loadUserData(); getForums(false); verifyMobile(false)">
+    <div id="option-container-mobile">
+        <center>
+            <label>Crafty Hub - </label><label id="user-name">Not Logged</label><br><br>
+            <span onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(3)">
+                <img src="assets/account and about.png" class="option-icon">
+            </span>
+        </center>
+    </div>
+
     <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
         <br><br>
         <div id="plataform-name-handler" onclick="redirect(0)">
