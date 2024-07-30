@@ -13,7 +13,7 @@
     <script src="main.js"></script>
 </head>
 
-<body onload="loadUserData(); getForums(false); verifyMobile(false)">
+<body onload="loadUserData(); getForums(false); verifyMobile(false,true)">
     <div id="option-container-mobile">
         <center>
             <label>Crafty Hub - </label><label id="user-name-mb">Not Logged</label><br><br>
@@ -55,6 +55,19 @@
         <div id="login-data" onclick="redirect(3)">
             <img src="assets/account and about.png" class="option-icon">
             <label id="user-name" class="option-label">Crafty Login</label>
+        </div>
+    </div>
+    <div id="topDiv">
+        <div id="topDeco" style="text-align: center;">
+            <img src="assets/nether hub island.png" style="margin-bottom: -40px;width: 100px;">
+            <h1 id="topText">Nether Hub</h1>
+        </div>
+        <div id="topOptions" onmouseover="openCraftyCollapse()" onmouseleave="closeCraftyCollapse()">
+            <label id="topOptionsLabel">Crafty Hub Options: ▽</label>
+            <div id="topOptionsCollapse" style="visibility: hidden;">
+                <button onclick="searchPage('netherhub')">Search<br><img src="assets/Spyglass.png"></button>
+                <button onclick="usersPage()">Users<br><img src="assets/steve.jpeg"></button>
+            </div>
         </div>
     </div>
 

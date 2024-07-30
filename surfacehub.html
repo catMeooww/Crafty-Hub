@@ -13,7 +13,7 @@
     <script src="main.js"></script>
 </head>
 
-<body onload="loadUserData(); getForums(true); verifyMobile(false)">
+<body onload="loadUserData(); getForums(true); verifyMobile(false,true)">
     <div id="option-container-mobile">
         <center>
             <label>Crafty Hub - </label><label id="user-name-mb">Not Logged</label><br><br>
@@ -31,7 +31,19 @@
             </span>
         </center>
     </div>
-
+    <div id="topDiv">
+        <div id="topDeco" style="text-align: center;">
+        <img src="assets/surface hub island.png" style="margin-bottom: -40px;width: 100px;">
+            <h1 id="topText">Surface Hub</h1>
+        </div>
+        <div id="topOptions" onmouseover="openCraftyCollapse()" onmouseleave="closeCraftyCollapse()">
+            <label id="topOptionsLabel">Crafty Hub Options: ▽</label>
+            <div id="topOptionsCollapse" style="visibility: hidden;">
+                <button onclick="searchPage('surfacehub')">Search<br><img src="assets/Spyglass.png"></button>
+                <button onclick="usersPage()">Users<br><img src="assets/steve.jpeg"></button>
+            </div>
+        </div>
+    </div>
     <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
         <br><br>
         <div id="plataform-name-handler" onclick="redirect(0)">
@@ -40,10 +52,12 @@
         <br><br>
         <div id="pages">
             <div id="surfacehub-btn" onclick="redirect(1)">
-                <img src="assets/surface hub island.png" class="option-icon"><label class="option-label">Surface Hub</label>
+                <img src="assets/surface hub island.png" class="option-icon"><label class="option-label">Surface
+                    Hub</label>
             </div>
             <div id="netherhub-btn" onclick="redirect(2)">
-                <img src="assets/nether hub island.png" class="option-icon"><label class="option-label">Nether Hub</label>
+                <img src="assets/nether hub island.png" class="option-icon"><label class="option-label">Nether
+                    Hub</label>
             </div>
             <div id="create-btn" onclick="redirect(4)">
                 <img src="assets/creation island.png" class="option-icon"><label class="option-label">Create</label>

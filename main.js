@@ -15,7 +15,7 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-function verifyMobile(hasHeader) {
+function verifyMobile(hasHeader, hasCraftyOptions) {
     var testMobile = /iPhone|Android|iPad/i.test(navigator.userAgent)
     if (testMobile) {
         isMobile = true
@@ -27,6 +27,17 @@ function verifyMobile(hasHeader) {
             document.getElementsByClassName('headerTools').item(0).style.top = '20%';
             document.getElementsByClassName('headerTools').item(0).style.left = '0%';
             document.getElementsByClassName('headerTools').item(0).style.width = '100%';
+        }
+        if (hasCraftyOptions) {
+            document.getElementById('topOptionsLabel').innerHTML = '←';
+            document.getElementById('topOptionsLabel').style.top = '-2px';
+            document.getElementById('topOptionsLabel').style.margin = '0px';
+            document.getElementById('topOptions').style.width = '15px';
+            document.getElementById('topOptions').style.height = '15px';
+            document.getElementById('topOptions').style.right = '0px';
+            document.getElementById('topOptions').style.top = '150px';
+            document.getElementById('topDiv').style.height = '0px';
+            document.getElementById('topText').innerHTML = " "
         }
     }
 }
@@ -95,6 +106,33 @@ function unuserBright() {
     }
 }
 
+function openCraftyCollapse() {
+    if (!isMobile) {
+        document.getElementById('topOptionsLabel').style.top = "0px";
+        document.getElementById('topOptionsLabel').innerHTML = "Crafty Hub Options: △";
+        document.getElementById('topOptions').style.height = "100px";
+        document.getElementById('topOptionsCollapse').style.visibility = 'visible';
+    }else{
+        document.getElementById('topOptions').style.width = "200px";
+        document.getElementById('topOptions').style.height = "100px";
+        document.getElementById('topOptionsLabel').innerHTML = "-Crafty Hub Options-";
+        document.getElementById('topOptionsCollapse').style.visibility = 'visible';
+    }
+}
+function closeCraftyCollapse() {
+    if (!isMobile) {
+        document.getElementById('topOptionsLabel').style.top = "14px";
+        document.getElementById('topOptionsLabel').innerHTML = "Crafty Hub Options: ▽";
+        document.getElementById('topOptions').style.height = "50px";
+        document.getElementById('topOptionsCollapse').style.visibility = 'hidden';
+    }else{
+        document.getElementById('topOptions').style.width = "15px";
+        document.getElementById('topOptions').style.height = "15px";
+        document.getElementById('topOptionsLabel').innerHTML = "←";
+        document.getElementById('topOptionsCollapse').style.visibility = 'hidden';
+    }
+}
+
 function showOptions() {
     document.getElementById("mainBody").style.width = "74%";
     document.getElementById("option-container").style.width = "25%";
@@ -129,9 +167,9 @@ function getForums(isSurface) {
 
             nameH2 = "<h2>" + forumName + "</h2>";
             if (verified) {
-                bottomLabel = "<div class='trueV'><label>sended by: " + whoSend + "</label><label class='isVerifier'>Verified</label></div>";
+                bottomLabel = "<div class='trueV'><label>sent by: " + whoSend + "</label><label class='isVerifier'>| Verified |</label></div>";
             } else {
-                bottomLabel = "<div class='falseV'><label>sended by: " + whoSend + "</label><label class='isVerifier'>Unverified</label></div>";
+                bottomLabel = "<div class='falseV'><label>sent by: " + whoSend + "</label><label class='isVerifier'>| Unverified |</label></div>";
             }
 
             forumdiv = "<div class='forumdiv' id='" + firebaseMessageId + "' onclick='openforum(this.id)'>" + nameH2 + bottomLabel + "</div><br><br>";
@@ -270,4 +308,9 @@ function sendComment(commentType) {
     } else {
         document.getElementById("commentError").innerHTML = "You need to Login First";
     }
+}
+
+function searchPage(p){
+    localStorage.setItem('latestPage',p)
+    window.location = 'craftyFinder.html';
 }

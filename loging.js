@@ -82,7 +82,11 @@ function loadUserLogData() {
                         canPass = data.val();
                         if (canPass == password) {
                             logged = true;
-                            document.getElementById("user-name").innerHTML = user;
+                            if (isMobile) {
+                                document.getElementById("user-name-mb").innerHTML = user;
+                            } else {
+                                document.getElementById("user-name").innerHTML = user;
+                            }
                             document.getElementById("login-page").innerHTML = "<div style='padding: 10px;background-color: rgba(0, 0, 0, 0.500); border: outset black 5px;'><h3>Logged as: "+user+"</h3><button style='background-color:red;color:white;padding:1px;' onclick='logout()'>Log-Out</button>"
                             console.log("logged: " + logged);
                         }

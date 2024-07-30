@@ -11,10 +11,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
     <script src="main.js"></script>
-    <script src="loging.js"></script>
+    <script src="searcher.js"></script>
 </head>
 
-<body onload="loadUserLogData(); verifyMobile(false,false)">
+<body onload="loadUserData();verifyMobile(false,true);loadPage('forums')">
     <div id="option-container-mobile">
         <center>
             <label>Crafty Hub - </label><label id="user-name-mb">Not Logged</label><br><br>
@@ -32,7 +32,6 @@
             </span>
         </center>
     </div>
-
     <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
         <br><br>
         <div id="plataform-name-handler" onclick="redirect(0)">
@@ -59,35 +58,55 @@
         </div>
     </div>
 
-    <!--Site Body-->
+    <div id="topDiv">
+        <div id="topDeco" style="text-align: center;">
+            <img src="assets/CraftyHub Logo.png" style="margin-bottom: -40px;width: 100px;">
+            <h1 id="topText">Search Forums in Crafty Hub</h1>
+        </div>
+        <div id="topOptions" onmouseover="openCraftyCollapse()" onmouseleave="closeCraftyCollapse()">
+            <label id="topOptionsLabel">Crafty Hub Options: ▽</label>
+            <div id="topOptionsCollapse" style="visibility: hidden;">
+                <button onclick="searchPage('surfacehub')">Search<br><img src="assets/Spyglass.png"></button>
+                <button onclick="usersPage()">Users<br><img src="assets/steve.jpeg"></button>
+            </div>
+        </div>
+    </div>
 
     <div id="mainBody">
         <div class="world-bg">
+            <br><br>
+            <h1>Search Options:</h1>
+            <br><br><br><br>
             <center>
-                <img src="assets/account and about.png" style="margin-bottom: -40px;width: 100px;">
-                <h1>Log-in Crafty Hub</h1>
-            </center>
-            <hr>
-            <div id="login-page" style="height: 450px;">
-                <div id="logindiv"
-                    style="padding: 10px;background-color: rgba(0, 0, 0, 0.500); border: outset black 5px;">
-                    <label>Log-in Account</label>
-                    <p>Your Username</p>
-                    <input type='text' id='login-username'>
-                    <p>Your Password</p>
-                    <input type='password' id='login-userpassword'>
+                <div class="searchDiv">
                     <br><br>
-                    <button onclick='LogAccount()' class="mc-button">Log-in</button>
-                    <br>
-                    <p id="login-error"></p>
+                    <span>
+                        <input class="searchBar" id="searcherForums">
+                        <button class="searchButton" onclick="setSearch()">Search</button>
+                    </span>
+                    <br><br>
+                    <hr>
+                    <div id="searchFilters">
+                        <p>Filters</p>
+                        <span>
+                            <button id="V1" onclick="filterV(0)"><img src="assets/surface hub island.png" width="50"></button>
+                            <button id="V2" onclick="filterV(1)"><img src="assets/nether hub island.png" width="50"></button>
+                        </span>
+                        <br><br>
+                        <span>
+                            <button id="T1" onclick="filterT(0)">FORUM NAME   </button>
+                            <button id="T2" onclick="filterT(1)">FORUM ID     </button>
+                            <button id="T3" onclick="filterT(2)">FORUM CREATOR</button>
+                        </span>
+                        <br><br>
+                    </div>
                 </div>
-                <hr>
-                <br><br>
-                <center>
-                    <button id="switch-btn" class="mc-button" onclick="switchlogin()">Create Account</button>
-                </center>
-            </div>
+                <br><br><br><br>
+            </center>
         </div>
+        <br><br>
+        <p><b id="searchName"></b> | Results:</p>
+        <div id="output" translate="no"></div>
     </div>
 </body>
 

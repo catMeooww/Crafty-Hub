@@ -13,6 +13,7 @@ body {
 #mainBody {
     width: 89%;
     float: right;
+    margin-top: 10%;
 }
 
 #option-container {
@@ -25,6 +26,7 @@ body {
     background-image: url(assets/Stone\ Background.png);
     border-right: 5px ridge rgba(0, 0, 0, 0.500);
     cursor: url("pickaxe.png"), pointer;
+    z-index: 100;
 }
 #option-container-mobile {
     position: fixed;
@@ -37,6 +39,7 @@ body {
     border-bottom: 5px ridge rgba(0, 0, 0, 0.500);
     cursor: url("pickaxe.png"), pointer;
     visibility: hidden;
+    z-index: 100;
 }
 #option-container-mobile img{
     background-color: rgba(0, 0, 0, 0.6);
@@ -160,6 +163,45 @@ div {
     margin-top: 20px;
 }
 
+#topDiv{
+ position: fixed;
+ top:0;
+ left: 0;
+ width: 100%;
+ height: 100px;
+ background-image: url(assets/Stone\ Background.png);
+}
+
+#topOptions{
+    text-align: center;
+    position: fixed;
+    z-index: 20;
+    top:30px;
+    right: 5%;
+    background-color: darkslategrey;
+    border:outset 4px rgba(0, 0, 0, 0.5);
+    padding: 2px;
+    width: 250px;
+    height: 50px;
+}
+#topOptions img{
+    width: 25px;
+}
+#topOptions button{
+    background-color: rgba(0, 0, 0, 0.5);
+    border:outset 5px rgba(0, 0, 0, 0.5);
+    color:aliceblue;
+    margin: 7px;
+    width: 70px;
+    height: 60px;
+}
+
+#topOptionsLabel{
+    position: relative;
+    top: 14px;
+    margin-left: 7px;
+}
+
 #login-data h2 {
     font-size: 15px;
 }
@@ -272,4 +314,32 @@ textarea {
     border: 1px outset blue;
     margin-top: 5px;
     padding: 2px;
+}
+
+.searchBar{
+    width: 50%;
+    box-shadow: 2px 2px 2px forestgreen;
+}
+
+.searchButton{
+    border: outset green 2px;
+    background-color: blueviolet;
+    box-shadow: 2px 2px 2px forestgreen;
+    color:aliceblue;
+    font-weight: bolder;
+    padding: 5px;
+    height: 30px;
+}
+
+#searchFilters button{
+    border: outset yellow 2px;
+    background-color: blueviolet;
+    color:aliceblue;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.searchDiv{
+    width: 90%;
+    border: solid 1px white
 }

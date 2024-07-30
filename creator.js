@@ -17,7 +17,11 @@ function loadUserCreatorData() {
                         if (canPass == password) {
                             logged = true;
                             whosEditing = user;
-                            document.getElementById("user-name").innerHTML = whosEditing;
+                            if (isMobile) {
+                                document.getElementById("user-name-mb").innerHTML = whosEditing;
+                            } else {
+                                document.getElementById("user-name").innerHTML = whosEditing;
+                            }
                             console.log("logged: " + logged);
                             openForumNameCreator();
                         }
