@@ -13,7 +13,7 @@
     <script src="main.js"></script>
 </head>
 
-<body onload="loadUserData(); getForums(true); verifyMobile(false,true)">
+<body onload="loadUserData(); getForums(true); verifyMobile(false,true,false)">
     <div id="option-container-mobile">
         <center>
             <label>Crafty Hub - </label><label id="user-name-mb">Not Logged</label><br><br>
@@ -83,7 +83,9 @@
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
         <br><br>
-        <div id="output" translate="no"></div>
+        <div id="output" translate="no">
+            Loading Forums...
+        </div>
     </div>
 </body>
 

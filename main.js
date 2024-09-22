@@ -15,7 +15,7 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-function verifyMobile(hasHeader, hasCraftyOptions) {
+function verifyMobile(hasHeader, hasCraftyOptions, hasForumData) {
     var testMobile = /iPhone|Android|iPad/i.test(navigator.userAgent)
     if (testMobile) {
         isMobile = true
@@ -38,6 +38,11 @@ function verifyMobile(hasHeader, hasCraftyOptions) {
             document.getElementById('topOptions').style.top = '150px';
             document.getElementById('topDiv').style.height = '0px';
             document.getElementById('topText').innerHTML = " "
+        }
+        if (hasForumData) {
+            document.getElementById("forumData").style.marginTop = "150px";
+            document.getElementById("commentSection").style.marginTop = "100px";
+            document.getElementById("forumComments").style.height = "50%";
         }
     }
 }
@@ -209,9 +214,9 @@ function getForumData() {
             firebase.database().ref("/forums/" + selectedForum + "/verification").on("value", data => {
                 thisForumVerification = data.val();
                 if (thisForumVerification) {
-                    thisForumHeader = "<div class='trueV'><label>sended by: " + thisForumCreator + "</label><label class='isVerifier'>Verified</label></div>";
+                    thisForumHeader = "<div class='trueV'><label>sent by: " + thisForumCreator + "</label><label class='isVerifier'>Verified</label></div>";
                 } else {
-                    thisForumHeader = "<div class='falseV'><label>sended by: " + thisForumCreator + "</label><label class='isVerifier'>Unverified</label></div>";
+                    thisForumHeader = "<div class='falseV'><label>sent by: " + thisForumCreator + "</label><label class='isVerifier'>Unverified</label></div>";
                 }
                 document.getElementById("thisForumHeader").innerHTML = thisForumHeader;
             })

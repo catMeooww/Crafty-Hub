@@ -33,7 +33,7 @@
     </style>
 </head>
 
-<body onload="loadUserCreatorData(); verifyMobile(true,false)">
+<body onload="loadUserCreatorData(); verifyMobile(true,false,false)">
     <div id="canEditDiv"
         style="position: fixed;z-index: 100;left: 10%;top: 0;width: 90%;height: 100%;background-image: url(assets/Stone\ Background.png);">
         <h1 id="canEditLog">LOADING...</h1>
@@ -100,7 +100,7 @@
                 <button class="ToolAdd" onclick="addToTopic(5)">Crafty Article</button>
             </center>
         </div>
-        <div id="createMain" style="margin-top: 150px;">
+        <div id="createMain" style="margin-top: 50px;">
 
         </div>
         <br><br><br><br>
@@ -115,6 +115,7 @@
            document.getElementById('canEditDiv').style.top = '20%';
            document.getElementById('canEditDiv').style.left = '0%';
            document.getElementById('canEditDiv').style.width = '100%';
+           document.getElementById("createMain").style.marginTop = "150px";
         }
     </script>
 </body>
