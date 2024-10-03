@@ -1,6 +1,7 @@
+page = "forums";
 searchText = "";
 searchV = "verified";
-searchType = "forum"
+searchType = "forum";
 
 function searchForums() {
     firebase.database().ref("/forums").on('value', function (snapshot) {
@@ -15,7 +16,7 @@ function searchForums() {
             whoSend = forumData['by'];
             verified = forumData['verification'];
 
-            if ((searchText.toUpperCase() == forumName.toUpperCase() && searchType == "forum") || (searchText.toUpperCase() == firebaseMessageId.toUpperCase() && searchType == "id") || (searchText.toUpperCase() == whoSend.toUpperCase() && searchType == "user") || (searchText == "")) {
+            if ((forumName.toUpperCase().indexOf(searchText.toUpperCase()) != -1 && searchType == "forum") || (firebaseMessageId.toUpperCase().indexOf(searchText.toUpperCase()) != -1 && searchType == "id") || (whoSend.toUpperCase().indexOf(searchText.toUpperCase()) != -1 && searchType == "user")) {
 
                 nameH2 = "<h2>" + forumName + "</h2>";
                 if (verified) {
@@ -32,6 +33,34 @@ function searchForums() {
                 } else if (searchV == "unverified" && !verified) {
                     document.getElementById("output").innerHTML += forumdiv;
                 }
+            }
+        });
+    });
+}
+
+function searchUsers() {
+    firebase.database().ref("/users").on('value', function (snapshot) {
+        document.getElementById("output").innerHTML = "";
+        snapshot.forEach(function (childSnapshot) {
+            childKey = childSnapshot.key; childData = childSnapshot.val();
+
+            userName = childKey;
+            userStatus = childData['status'];
+
+            if (userName.toUpperCase().indexOf(searchText.toUpperCase()) != -1) {
+
+                nameH2 = "<h2>" + userName + "</h2>";
+                if (userStatus == "online") {
+                    bottomLabel = "<div class='trueV'><label>Normal Account</label></div>";
+                }else if(userStatus == "mod"){
+                    bottomLabel = "<div class='trueV'><label>Administrator</label></div>";
+                } else {
+                    bottomLabel = "<div class='falseV'><label>Disabled Account</label></div>";
+                }
+
+                userdiv = "<div class='forumdiv' title='" + userName + "'>" + nameH2 + bottomLabel + "</div><br><br>";
+
+                document.getElementById("output").innerHTML += userdiv;
             }
         });
     });
@@ -65,17 +94,74 @@ function loadForumButtons() {
     searchForums();
 }
 
+function loadUsersButtons() {
+    if (user != undefined && password != undefined) {
+        var userref = firebase.database().ref("/users/" + user + "/status");
+        var passref = firebase.database().ref("/users/" + user + "/password");
+        var isUserCreated;
+        var isJoining = false;
+        userref.on("value", data => {
+            isUserCreated = data.val();
+            if (!isJoining) {
+                isJoining = true;
+                if (isUserCreated == "online" || isUserCreated == "mod") {
+                    passref.on("value", async data => {
+                        canPass = data.val();
+                        if (canPass == password) {
+                            logged = true;
+                            if (isMobile) {
+                                document.getElementById("user-name-mb").innerHTML = user;
+                            } else {
+                                document.getElementById("user-name").innerHTML = user;
+                            }
+                            console.log("logged: " + logged);
+
+                            firebase.database().ref("/forums").on('value', function (snapshot) {
+                                forumQ = 0;
+                                snapshot.forEach(function (childSnapshot) {
+                                    childKey = childSnapshot.key; childData = childSnapshot.val();
+                                    firebaseMessageId = childKey;
+                                    forumData = childData;
+                                    whoSend = forumData['by'];
+                                    if (whoSend == user){
+                                        forumQ += 1;
+                                    }
+                                });
+                                userDetailName = "<hr> <img src='assets/steve.jpeg' width=50> <label style='font-size:40px'>"+user+"</label><br><br>";
+                                userDetailPassword = "<button id='password_show' onclick='showpassword()'>Password: "+password+"</button><br><br>";
+                                userTotalForums = "<label>Forums Created: "+ forumQ +"</label><br><br>";
+                                loginPageBtn = "<button class='searchButton' onclick='redirect(3)'>Access Login Page</button><br><br>";
+                                document.getElementById("userData").innerHTML = userDetailName + userDetailPassword + userTotalForums + loginPageBtn;
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    }
+    console.log("logged: " + logged);
+
+    searchUsers();
+}
+
 function loadPage(type) {
     if (type == "forums") {
         loadForumButtons();
+    } else if (type == "users"){
+        loadUsersButtons()
     }
+    page = type;
 }
 
 function setSearch() {
     searching = document.getElementById("searcherForums").value;
     searchText = searching;
     document.getElementById("searchName").innerHTML = searching;
-    searchForums();
+    if (page == "forums"){
+        searchForums();
+    }else if (page ==  "users"){
+        searchUsers();
+    }
 }
 
 function filterV(v){
@@ -97,3 +183,12 @@ function filterT(t){
     }
     loadForumButtons();
   }
+
+function showpassword(){
+    passwordswitch = document.getElementById("password_show");
+    if (passwordswitch.style.backgroundColor == "black"){
+        passwordswitch.style.backgroundColor = "purple";
+    }else{
+        passwordswitch.style.backgroundColor = "black";
+    }
+}

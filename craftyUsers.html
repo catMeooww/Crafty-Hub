@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAFTY HUB</title>
+    <link rel="shortcut icon" href="House.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="main.js"></script>
+    <script src="searcher.js"></script>
+
+    <style>
+        #password_show{
+            background-color: black;
+            border: solid black 2px;
+        }
+    </style>
+</head>
+
+<body onload="verifyMobile(false,true,false);loadPage('users')">
+    <div id="option-container-mobile">
+        <center>
+            <label>Crafty Hub - </label><label id="user-name-mb">Not Logged</label><br><br>
+            <span onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(3)">
+                <img src="assets/account and about.png" class="option-icon">
+            </span>
+        </center>
+    </div>
+    <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
+        <br><br>
+        <div id="plataform-name-handler" onclick="redirect(0)">
+            <img src="assets/CraftyHub Logo.png" class="option-icon"><label class="option-label">Crafty Hub</label>
+        </div>
+        <br><br>
+        <div id="pages">
+            <div id="surfacehub-btn" onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon"><label class="option-label">Surface
+                    Hub</label>
+            </div>
+            <div id="netherhub-btn" onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon"><label class="option-label">Nether
+                    Hub</label>
+            </div>
+            <div id="create-btn" onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon"><label class="option-label">Create</label>
+            </div>
+        </div>
+        <br>
+        <div id="login-data" onclick="redirect(3)">
+            <img src="assets/account and about.png" class="option-icon">
+            <label id="user-name" class="option-label">Crafty Login</label>
+        </div>
+    </div>
+
+    <div id="topDiv">
+        <div id="topDeco" style="text-align: center;">
+            <img src="assets/CraftyHub Logo.png" style="margin-bottom: -40px;width: 100px;">
+            <h1 id="topText">Search Users in Crafty Hub</h1>
+        </div>
+        <div id="topOptions" onmouseover="openCraftyCollapse()" onmouseleave="closeCraftyCollapse()">
+            <label id="topOptionsLabel">Crafty Hub Options: ▽</label>
+            <div id="topOptionsCollapse" style="visibility: hidden;">
+                <button onclick="searchPage('surfacehub')">Search<br><img src="assets/Spyglass.png"></button>
+                <button onclick="usersPage()">Users<br><img src="assets/steve.jpeg"></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainBody">
+        <div class="world-bg">
+            <br><br>
+            <h1>Users in Crafty Hub</h1>
+            <br><br><br><br>
+            <center>
+                <div id="userData">
+                    <label>Not Logged In</label><br>
+                    <button class="searchButton" onclick="redirect(3)">Log-In here</button>
+                </div>
+                <hr>
+                <label>Find Users: </label>
+                <div class="searchDiv">
+                    <label>Serach for Users</label>
+                    <br><br>
+                    <span>
+                        <input class="searchBar" id="searcherForums">
+                        <button class="searchButton" onclick="setSearch()">Search</button>
+                    </span>
+                    <br><br>
+                </div>
+                <br><br><br><br>
+            </center>
+        </div>
+        <br><br>
+        <p><b id="searchName"></b> | Results:</p>
+        <div id="output" translate="no"></div>
+    </div>
+</body>
+
+</html>

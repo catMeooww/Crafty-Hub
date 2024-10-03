@@ -12,7 +12,7 @@ function LogAccount() {
             isUserCreated = data.val();
             if (!isJoining) {
                 isJoining = true;
-                if (isUserCreated == "online") {
+                if (isUserCreated == "online" || isUserCreated == "mod") {
                     passref.on("value", data => {
                         canPass = data.val();
                         if (canPass == passwordinput) {
@@ -24,6 +24,9 @@ function LogAccount() {
                             document.getElementById("login-userpassword").style.borderColor = "red";
                         }
                     })
+                } else if(isUserCreated == "disabled"){
+                    document.getElementById("login-error").innerHTML = "This account got disabled";
+                    document.getElementById("login-username").style.borderColor = "red";
                 } else {
                     document.getElementById("login-error").innerHTML = "Incorrect Username";
                     document.getElementById("login-username").style.borderColor = "red";
@@ -77,7 +80,7 @@ function loadUserLogData() {
             isUserCreated = data.val();
             if (!isJoining) {
                 isJoining = true;
-                if (isUserCreated == "online") {
+                if (isUserCreated == "online" || isUserCreated == "mod") {
                     passref.on("value", data => {
                         canPass = data.val();
                         if (canPass == password) {

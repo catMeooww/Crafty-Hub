@@ -41,7 +41,7 @@ function verifyMobile(hasHeader, hasCraftyOptions, hasForumData) {
         }
         if (hasForumData) {
             document.getElementById("forumData").style.marginTop = "150px";
-            document.getElementById("commentSection").style.marginTop = "100px";
+            document.getElementById("commentSection").style.marginTop = "110px";
             document.getElementById("forumComments").style.height = "50%";
         }
     }
@@ -57,7 +57,7 @@ function loadUserData() {
             isUserCreated = data.val();
             if (!isJoining) {
                 isJoining = true;
-                if (isUserCreated == "online") {
+                if (isUserCreated == "online" || isUserCreated == "mod") {
                     passref.on("value", data => {
                         canPass = data.val();
                         if (canPass == password) {
@@ -318,4 +318,8 @@ function sendComment(commentType) {
 function searchPage(p){
     localStorage.setItem('latestPage',p)
     window.location = 'craftyFinder.html';
+}
+
+function usersPage(){
+    window.location = 'craftyUsers.html';
 }

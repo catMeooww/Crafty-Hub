@@ -232,6 +232,11 @@ textarea {
     padding: 10px;
 }
 
+.forumdiv:hover {
+    border-color: green;
+    cursor: pointer;
+}
+
 .trueV {
     background-color: rgba(0, 128, 0, 0.3);
     border: 2px outset rgba(0, 0, 0, 0.3);

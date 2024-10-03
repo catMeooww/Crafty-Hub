@@ -11,7 +11,7 @@ function loadUserCreatorData() {
             isUserCreated = data.val();
             if (!isJoining) {
                 isJoining = true;
-                if (isUserCreated == "online") {
+                if (isUserCreated == "online" || isUserCreated == "mod") {
                     passref.on("value", data => {
                         canPass = data.val();
                         if (canPass == password) {
