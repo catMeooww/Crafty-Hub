@@ -41,7 +41,7 @@ function verifyMobile(hasHeader, hasCraftyOptions, hasForumData) {
         }
         if (hasForumData) {
             document.getElementById("forumData").style.marginTop = "150px";
-            document.getElementById("commentSection").style.marginTop = "110px";
+            document.getElementById("commentSection").style.marginTop = "120px";
             document.getElementById("forumComments").style.height = "50%";
         }
     }
@@ -117,9 +117,9 @@ function openCraftyCollapse() {
         document.getElementById('topOptionsLabel').innerHTML = "Crafty Hub Options: △";
         document.getElementById('topOptions').style.height = "100px";
         document.getElementById('topOptionsCollapse').style.visibility = 'visible';
-    }else{
+    } else {
         document.getElementById('topOptions').style.width = "200px";
-        document.getElementById('topOptions').style.height = "100px";
+        document.getElementById('topOptions').style.height = "200px";
         document.getElementById('topOptionsLabel').innerHTML = "-Crafty Hub Options-";
         document.getElementById('topOptionsCollapse').style.visibility = 'visible';
     }
@@ -130,7 +130,7 @@ function closeCraftyCollapse() {
         document.getElementById('topOptionsLabel').innerHTML = "Crafty Hub Options: ▽";
         document.getElementById('topOptions').style.height = "50px";
         document.getElementById('topOptionsCollapse').style.visibility = 'hidden';
-    }else{
+    } else {
         document.getElementById('topOptions').style.width = "15px";
         document.getElementById('topOptions').style.height = "15px";
         document.getElementById('topOptionsLabel').innerHTML = "←";
@@ -315,11 +315,15 @@ function sendComment(commentType) {
     }
 }
 
-function searchPage(p){
-    localStorage.setItem('latestPage',p)
+function searchPage(p) {
+    localStorage.setItem('latestPage', p)
     window.location = 'craftyFinder.html';
 }
 
-function usersPage(){
+function usersPage() {
     window.location = 'craftyUsers.html';
+}
+
+function catMeoowwProjects() {
+    window.location = 'https://catmeooww.github.io/CatMeooww/catmeoowwProjects.html';
 }

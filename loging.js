@@ -90,7 +90,7 @@ function loadUserLogData() {
                             } else {
                                 document.getElementById("user-name").innerHTML = user;
                             }
-                            document.getElementById("login-page").innerHTML = "<div style='padding: 10px;background-color: rgba(0, 0, 0, 0.500); border: outset black 5px;'><h3>Logged as: "+user+"</h3><button style='background-color:red;color:white;padding:1px;' onclick='logout()'>Log-Out</button>"
+                            document.getElementById("login-page").innerHTML = "<div style='padding: 10px;background-color: rgba(0, 0, 0, 0.500); border: outset black 5px;'><h3>Logged as: "+user+"</h3><button style='background-color:red;color:white;padding:1px;' onclick='logout()'>Log-Out</button><hr><button  style='background-color:green;color:white;padding:2px;' onclick='usersPage()'>View you in Crafty Users</button><br>";
                             console.log("logged: " + logged);
                         }
                     })
@@ -104,11 +104,11 @@ function loadUserLogData() {
 function switchlogin() {
     if (switchLogMode == "login") {
         switchLogMode = "create";
-        document.getElementById("logindiv").innerHTML = "<label>Create Account</label><p>Your Username</p><input type='text' id='login-username'><p>Your Password</p><input type='password' id='login-userpassword'><br><br><button onclick='createAccount()' class='mc-button'>Create Account</button><br><p id='login-error'></p>"
+        document.getElementById("logindiv").innerHTML = "<label>Create Account</label><p>Your Username</p><input type='text' id='login-username'><p>Your Password</p><input type='password' id='login-userpassword'><br><br><button onclick='createAccount()' class='mc-button'>Create Account</button><br><p id='login-error'></p>";
         document.getElementById("switch-btn").innerHTML = "Log-in";
     } else {
         switchLogMode = "login";
-        document.getElementById("logindiv").innerHTML = "<label>Log-in Account</label><p>Your Username</p><input type='text' id='login-username'><p>Your Password</p><input type='password' id='login-userpassword'><br><br><button onclick='LogAccount()' class='mc-button'>Log-in</button><br><p id='login-error'></p>"
+        document.getElementById("logindiv").innerHTML = "<label>Log-in Account</label><p>Your Username</p><input type='text' id='login-username'><p>Your Password</p><input type='password' id='login-userpassword'><br><br><button onclick='LogAccount()' class='mc-button'>Log-in</button><br><p id='login-error'></p>";
         document.getElementById("switch-btn").innerHTML = "Create Account";
     }
 }
