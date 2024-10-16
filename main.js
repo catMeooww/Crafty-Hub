@@ -43,6 +43,10 @@ function verifyMobile(hasHeader, hasCraftyOptions, hasForumData) {
             document.getElementById("forumData").style.marginTop = "150px";
             document.getElementById("commentSection").style.marginTop = "120px";
             document.getElementById("forumComments").style.height = "50%";
+            document.getElementById("shareWindow").style.top = "25%";
+            document.getElementById("shareWindow").style.left = "5%";
+            document.getElementById("shareWindow").style.width = "90%";
+            document.getElementById("shareWindow").style.height = "60%";
         }
     }
 }
@@ -208,6 +212,7 @@ function getForumData() {
                 document.getElementsByClassName('headerTools').item(0).innerHTML = "Could Not Find Providen Topic );";
             }
             document.getElementById("thisForumName").innerHTML = thisForumName;
+            document.getElementById("CraftyNaming").innerHTML = thisForumName;
         })
         firebase.database().ref("/forums/" + selectedForum + "/by").on("value", data => {
             thisForumCreator = data.val();
@@ -277,6 +282,9 @@ function getForumData() {
                 document.getElementById("commentsHeader").innerHTML = "Comments - " + commentsQuantity;
             }
         });
+
+        //forum url
+        document.getElementById("CraftyUrl").innerHTML = "https://catmeooww.github.io/Crafty-Hub/redirect.html?" + selectedForum
     } else {
         window.location = "surfacehub.html";
     }
@@ -313,6 +321,14 @@ function sendComment(commentType) {
     } else {
         document.getElementById("commentError").innerHTML = "You need to Login First";
     }
+}
+
+function ShareForum(){
+    document.getElementById("shareWindow").style.visibility = "visible";
+}
+
+function CloseShare(){
+    document.getElementById("shareWindow").style.visibility = "hidden";
 }
 
 function searchPage(p) {

@@ -348,3 +348,24 @@ textarea {
     width: 90%;
     border: solid 1px white
 }
+
+#shareWindow {
+    z-index: 5px;
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    background-color: rgb(26, 26, 26);
+    left: 15%;
+    top: 10%;
+    text-align: center;
+    border: ridge white 3px;
+    visibility: hidden;
+}
+
+#shareWindow h6{
+    width: 90%;
+    margin-left: 5%;
+    background-color: black;
+    padding: 5px;
+    border: inset 2px gray;
+}

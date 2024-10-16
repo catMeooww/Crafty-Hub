@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAFTY HUB</title>
+    <link rel="shortcut icon" href="House.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body onload="loadUserData(); verifyMobile(false,false,false)">
+    <div id="option-container-mobile">
+        <center>
+            <label>Crafty Hub - </label><label id="user-name-mb">Not Logged</label><br><br>
+            <span onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon">
+            </span>
+            <span onclick="redirect(3)">
+                <img src="assets/account and about.png" class="option-icon">
+            </span>
+        </center>
+    </div>
+    <div id="topDiv">
+        <div id="topDeco" style="text-align: center;">
+        <img src="assets/CraftyHub Logo.png" style="margin-bottom: -40px;width: 100px;">
+            <h1 id="topText">Redirect to Crafty Forum!</h1>
+        </div>
+    </div>
+    <div id="option-container" onmouseover="showOptions()" onmouseleave="hideOptions()">
+        <br><br>
+        <div id="plataform-name-handler" onclick="redirect(0)">
+            <img src="assets/CraftyHub Logo.png" class="option-icon"><label class="option-label">Crafty Hub</label>
+        </div>
+        <br><br>
+        <div id="pages">
+            <div id="surfacehub-btn" onclick="redirect(1)">
+                <img src="assets/surface hub island.png" class="option-icon"><label class="option-label">Surface
+                    Hub</label>
+            </div>
+            <div id="netherhub-btn" onclick="redirect(2)">
+                <img src="assets/nether hub island.png" class="option-icon"><label class="option-label">Nether
+                    Hub</label>
+            </div>
+            <div id="create-btn" onclick="redirect(4)">
+                <img src="assets/creation island.png" class="option-icon"><label class="option-label">Create</label>
+            </div>
+        </div>
+        <br>
+        <div id="login-data" onclick="redirect(3)">
+            <img src="assets/account and about.png" class="option-icon">
+            <label id="user-name" class="option-label">Crafty Login</label>
+        </div>
+    </div>
+
+    <!--Site Body-->
+
+    <div id="mainBody">
+        <div class="world-bg">
+            <br><br>
+            <h1>Crafty Hub Forum</h1>
+            <hr>
+            <br><br>
+            <br><br>
+            <div id="output" style="text-align: left;">
+
+            </div>
+            <br><br>
+            <br><br>
+            <label style="float: right;color: blueviolet;" onclick="redirect(0)">From Crafty Hub</label>
+            <br><br>
+        </div>
+    </div>
+    <script>
+        url = window.location.href
+        url = url.split("?")
+        if (url.length == 2){
+            id = url[1]
+            var forumref = firebase.database().ref("/forums/" + id + "/name");
+            var creatorref = firebase.database().ref("/forums/" + id + "/by");
+            var verifyref = firebase.database().ref("/forums/" + id + "/verification");
+            readed_name = false;
+            readed_creator = false;
+            readed_verification = false;
+            forumref.on("value", data => {
+                name = data.val();
+                if (!readed_name) {
+                    readed_name = name
+                    creatorref.on("value", data => {
+                        creator = data.val();
+                        if (!readed_creator) {
+                            readed_creator = creator
+                            verifyref.on("value", data => {
+                                verification = data.val();
+                                if (!readed_verification) {
+                                    readed_verification = verification
+                                    if (readed_name != undefined && readed_creator != undefined && readed_verification != undefined){
+                                        nameH2 = "<h2>" + readed_name + "</h2>";
+                                        if (readed_verification) {
+                                            bottomLabel = "<div class='trueV'><label>sent by: " + readed_creator + "</label><label class='isVerifier'>| Verified |</label></div>";
+                                        } else {
+                                            bottomLabel = "<div class='falseV'><label>sent by: " + readed_creator + "</label><label class='isVerifier'>| Unverified |</label></div>";
+                                        }
+                                        forumdiv = "<div class='forumdiv' id='" + id + "' onclick='openforum(this.id)'>" + nameH2 + bottomLabel + "</div><br><br>";
+                                    }else{
+                                        forumdiv = "<div class='forumdiv'>Could not find selected forum ):</div><br><br>";
+                                    }
+                                    document.getElementById('output').innerHTML = forumdiv;
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }else{
+            document.getElementById('output').innerHTML = "<div class='forumdiv' onclick='redirect(1)'>View Crafty Hub's Surface Hub here!</div><br><br>";
+        }
+    </script>
+</body>
+
+</html>
