@@ -15,4 +15,5 @@
   - Search by it ID
   - Search by your favorite creators
 ## New Updates
-  New updates are coming! See the news and suggest ideas in the Forum "Whats your Opnion?" "-Nx6KXPfnhjo81aVdKMT"!
+  New updates are coming! See the news and suggest ideas in the Forum [Whats your Opnion?](https://catmeooww.github.io/Crafty-Hub/redirect.html?-Nx6KXPfnhjo81aVdKMT
+)
