@@ -289,7 +289,7 @@ textarea {
 }
 
 #commentSection {
-    z-index: 5px;
+    z-index: 5;
     position: fixed;
     width: 20%;
     height: 100%;
