@@ -13,7 +13,7 @@
     <script src="main.js"></script>
 </head>
 
-<body onload="loadUserData(); getForumData(); verifyMobile(true,false,true)">
+<body onload="loadUserData(); getForumData(); verifyMobile(true,false,true); verifyAdmin()">
     <div id="option-container-mobile">
         <center>
             <label>Crafty Hub - </label><label id="user-name-mb">Not Logged</label><br><br>
@@ -106,6 +106,41 @@
         </div>
         <div id="forumData" style="margin-top: 50px;">
             LOADING...
+        </div>
+        <div id="adminPanel" style="visibility: hidden;">
+            <p>Admin:</p>
+            <button onclick="adminVerifyForum()" id="VerifyButton" class="falseV">Verify Forum</button>
+            <br><br>
+            <script>
+                function verifyAdmin() {
+                    if (user != undefined && password != undefined) {
+                        var userref = firebase.database().ref("/users/" + user + "/status");
+                        var passref = firebase.database().ref("/users/" + user + "/password");
+                        var isUserCreated;
+                        var isJoining = false;
+                        userref.on("value", data => {
+                            isUserCreated = data.val();
+                            if (!isJoining) {
+                                isJoining = true;
+                                if (isUserCreated == "mod") {
+                                    passref.on("value", data => {
+                                        canPass = data.val();
+                                        if (canPass == password) {
+                                            document.getElementById("adminPanel").style.visibility = "visible";
+                                        }
+                                    })
+                                }
+                            }
+                        });
+                    }
+                }
+
+                function adminVerifyForum(){
+                    localStorage.getItem("selectedForum");
+                    firebase.database().ref("/forums/" + selectedForum + "/verification").set(true);
+                    location.reload();
+                }
+            </script>
         </div>
     </div>
 </body>

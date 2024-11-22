@@ -258,7 +258,14 @@ textarea {
     width: 87%;
 }
 
-#sendBar {
+#editOldForuns{
+    width: 80%;
+    height: 220px;
+    overflow-y: scroll;
+    border: ridge black 10px;
+}
+
+#sendBar,#adminPanel {
     position: fixed;
     bottom: 0px;
     right: 0px;
@@ -368,4 +375,15 @@ textarea {
     background-color: black;
     padding: 5px;
     border: inset 2px gray;
+}
+
+#VerifyButton{
+    color: aliceblue;
+    padding: 10px;
+    width: 100%;
+}
+
+#VerifyButton:hover{
+    cursor: pointer;
+    border-color: cyan;
 }

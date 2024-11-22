@@ -41,7 +41,7 @@ function verifyMobile(hasHeader, hasCraftyOptions, hasForumData) {
         }
         if (hasForumData) {
             document.getElementById("forumData").style.marginTop = "150px";
-            document.getElementById("commentSection").style.marginTop = "120px";
+            document.getElementById("commentSection").style.marginTop = "150px";
             document.getElementById("forumComments").style.height = "50%";
             document.getElementById("shareWindow").style.top = "25%";
             document.getElementById("shareWindow").style.left = "5%";
@@ -220,6 +220,8 @@ function getForumData() {
                 thisForumVerification = data.val();
                 if (thisForumVerification) {
                     thisForumHeader = "<div class='trueV'><label>sent by: " + thisForumCreator + "</label><label class='isVerifier'>Verified</label></div>";
+                    document.getElementById("VerifyButton").className = "trueV";
+                    document.getElementById("VerifyButton").innerHTML = "Already Verified";
                 } else {
                     thisForumHeader = "<div class='falseV'><label>sent by: " + thisForumCreator + "</label><label class='isVerifier'>Unverified</label></div>";
                 }

@@ -1,3 +1,4 @@
+var editForumId = "new";
 var ThisForumName = "";
 var whosEditing = "";
 
@@ -40,7 +41,38 @@ function openForumNameCreator() {
     thisH1 = "<h1>Creating a new Forum</h1><h2>Forum Name:</h2>";
     thisInput = "<input id='inputNAME'><br><br><button onclick='createThisForum()'>CREATE</button>";
     thisNameHandler = "<p>Forum By: " + whosEditing + "</p>";
-    document.getElementById("canEditDiv").innerHTML = "<center>" + thisH1 + thisInput + thisNameHandler + "</center>";
+    thisEditPreviousDiv = "<br><br><hr><h2>Edit my Forums</h2><div id='editOldForuns'></div>";
+    document.getElementById("canEditDiv").innerHTML = "<center>" + thisH1 + thisInput + thisNameHandler + thisEditPreviousDiv + "</center>";
+    openEditOldForuns();
+}
+
+function openEditOldForuns() {
+    firebase.database().ref("/forums").on('value', function (snapshot) {
+        document.getElementById("editOldForuns").innerHTML = "";
+        snapshot.forEach(function (childSnapshot) {
+            childKey = childSnapshot.key; childData = childSnapshot.val();
+
+            firebaseMessageId = childKey;
+            forumData = childData;
+
+            forumName = forumData['name'];
+            whoSend = forumData['by'];
+            verified = forumData['verification'];
+
+            nameH2 = "<h2>" + forumName + "</h2>";
+            if (verified) {
+                bottomLabel = "<div class='trueV'><label>" + firebaseMessageId + "</label></div>";
+            } else {
+                bottomLabel = "<div class='falseV'><label>" + firebaseMessageId + "</label></div>";
+            }
+
+            forumdiv = "<div class='forumdiv' id='" + firebaseMessageId + "' onclick='editExistent(this.id)'>" + nameH2 + bottomLabel + "</div><br><br>";
+
+            if (whoSend == user) {
+                document.getElementById("editOldForuns").innerHTML += forumdiv;
+            }
+        });
+    });
 }
 
 function createThisForum() {
@@ -54,46 +86,46 @@ function createThisForum() {
 
 var resources = [];
 
-function addToTopic(type) {
+function addToTopic(type,predata="") {
     if (type == 1) {
-        textArea = "<p>Add Text:</p><textarea id='input" + resources.length + "'></textarea><br>";
+        textArea = "<p>Add Text:</p><textarea id='input" + resources.length + "'>"+predata+"</textarea><br>";
         buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
         document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='wood-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "Text",
-            data: ""
+            data: predata
         });
     } else if (type == 2) {
-        textArea = "<p>Add Image URL:</p><textarea id='input" + resources.length + "'></textarea><br>";
+        textArea = "<p>Add Image URL:</p><textarea id='input" + resources.length + "'>"+predata+"</textarea><br>";
         buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
         document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='frame-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "Image",
-            data: ""
+            data: predata
         });
     } else if (type == 3) {
-        textArea = "<p>Add Link URL:</p><textarea id='input" + resources.length + "'></textarea><br>";
+        textArea = "<p>Add Link URL:</p><textarea id='input" + resources.length + "'>"+predata+"</textarea><br>";
         buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
         document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='portal-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "Link",
-            data: ""
+            data: predata
         });
     } else if (type == 4) {
-        textArea = "<p>Add Link URL:</p><textarea id='input" + resources.length + "'></textarea><br>";
+        textArea = "<p>Add Link URL:</p><textarea id='input" + resources.length + "'>"+predata+"</textarea><br>";
         buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
         document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='frame-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "IFrame",
-            data: ""
+            data: predata
         });
     } else if (type == 5) {
-        textArea = "<p>Add Forum ID:</p><textarea id='input" + resources.length + "'></textarea><br>";
+        textArea = "<p>Add Forum ID:</p><textarea id='input" + resources.length + "'>"+predata+"</textarea><br>";
         buttons = "<button id='" + resources.length + "' onclick='finishItem(this.id)'>Ok</button><button id='" + resources.length + "' onclick='cancelItem(this.id)'>Cancel</button>";
         document.getElementById("createMain").innerHTML += "<div id='div" + resources.length + "' class='world-bg item'>" + textArea + buttons + "</div>";
         resources.push({
             type: "CrFr",
-            data: ""
+            data: predata
         });
     }
 }
@@ -124,15 +156,60 @@ function cancelItem(item) {
 
 function send() {
     if (resources.length > 0) {
-        firebase.database().ref("/forums/").push({
-            by: whosEditing,
-            name: ThisForumName,
-            verification: false,
-            resources: resources,
-        });
+        if (editForumId == "new") {
+            firebase.database().ref("/forums/").push({
+                by: whosEditing,
+                name: ThisForumName,
+                verification: false,
+                resources: resources
+            });
+        } else {
+            firebase.database().ref("/forums/" + editForumId).update({
+                by: whosEditing,
+                name: ThisForumName,
+                verification: false,
+                resources: resources
+            });
+        }
         document.getElementById("canEditDiv").style.visibility = "visible";
-        document.getElementById("canEditDiv").innerHTML = "<h1>FORUM SENT</h1><p>Name: "+ThisForumName+"</p><p>Creator: "+whosEditing+"</p><p>" + resources.length + " resources in it</p>";
-    }else{
+        document.getElementById("canEditDiv").innerHTML = "<h1>FORUM SENT</h1><p>Name: " + ThisForumName + "</p><p>Creator: " + whosEditing + "</p><p>" + resources.length + " resources in it</p>";
+    } else {
         console.error("Too small Forum!");
     }
+}
+
+function editExistent(id) {
+    loaded = false;
+    firebase.database().ref("/forums/" + id + "/name").on("value", data => {
+        ThisForumName = data.val();
+        document.getElementById("ForumNameHandler").innerHTML = ThisForumName;
+    });
+    firebase.database().ref("/forums/" + id + "/resources").on('value', function (snapshot) {
+        if (!loaded) {
+            loaded = true;
+            snapshot.forEach(function (childSnapshot) {
+                childKey = childSnapshot.key; childData = childSnapshot.val();
+
+                itenId = childKey;
+                itemData = childData;
+
+                itemContent = itemData['data'];
+                itemType = itemData['type'];
+
+                if (itemType == "Text"){
+                    addToTopic(1,itemContent)
+                }else if(itemType == "Image"){
+                    addToTopic(2,itemContent)
+                }else if(itemType == "Link"){
+                    addToTopic(3,itemContent)
+                }else if(itemType == "IFrame"){
+                    addToTopic(4,itemContent)
+                }else if(itemType == "CrFr"){
+                    addToTopic(5,itemContent)
+                }
+            });
+        }
+    });
+    document.getElementById("canEditDiv").style.visibility = "hidden";
+    editForumId = id;
 }
